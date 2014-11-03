@@ -1,5 +1,7 @@
 package screens
 {
+	import com.greensock.TweenLite;
+	
 	import starling.display.Button;
 	import starling.display.Image;
 	import starling.display.Sprite;
@@ -7,7 +9,7 @@ package screens
 	
 	public class Welcome extends Sprite
 	{
-		private var  bg:Image;
+		private var bg:Image;
 		private var title:Image;
 		private var hero:Image;
 		
@@ -28,7 +30,8 @@ package screens
 			drawScreen();
 		}
 		
-		private function drawScreen();void
+		private function drawScreen():void
+		
 		{
 			bg = new Image(Assets.getTexture("BgWelcome"));
 			this.addChild(bg);
@@ -41,14 +44,14 @@ package screens
 			hero = new Image(Assets.getTexture("WelcomeHero"));
 			this.addChild(hero);
 			
-			playBtn = newButton(Assets.getTexture("WelcomePlayBtn"));
+			playBtn = new Button(Assets.getTexture("WelcomePlayBtn"));
 			playBtn.x = 500;
 			playBtn.y = 260;
 			this.addChild(playBtn);
 			
-			aboutBtn = newButton(Assets.getTexture("WelcomeAboutBtn"));
+			aboutBtn = new Button(Assets.getTexture("WelcomeAboutBtn"));
 			aboutBtn.x = 410;
-			aboutBtny = 380;
+			aboutBtn.y = 380;
 			this.addChild(aboutBtn);
 		}
 		
@@ -56,6 +59,25 @@ package screens
 			
 		{
 			this.visible = true;
+			
+			hero.x = -hero.width;
+			hero.y = 100;
+			
+			TweenLite.to(hero, 2, {x:80});
+			
+			this.addEventListener(Event.ENTER_FRAME, heroAnimation);)
+		}
+		
+		private function heroAnimation(event:Event):void
+			
+		{
+			var currentDate:Date = new Date();
+			hero.y = 100 + (Math.cos(currentDate.getTime() * 0.002) * 25);
+			playBtn.y = 260 + (Math.cos(currentDate.getTime() * 0.002) * 10);
+			aboutBtn = 380 + (Math.cos(currentDate.getTime() * 0.002) * 10);
+		}
+		
+		
 		}
 	}
 }

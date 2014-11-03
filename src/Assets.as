@@ -1,7 +1,9 @@
 package
 {
 	import flash.display.Bitmap;
-	import flash.display3D.textures.Texture;
+	import flash.utils.Dictionary;
+	
+	import starling.textures.Texture;
 
 	public class Assets
 	{
@@ -26,11 +28,13 @@ package
 		
 		public static function getTexture(name:String):Texture
 		{
-		if (gameTextures[name] == undefined)	
-		{
-			var bitmap:Bitmap = new Assets[name]();
-			gameTextures[name] = Texture.fromBitmap(bitmap);
-		}	
+			if (gameTextures[name] == undefined)	
+			{
+				
+				var bitmap:Bitmap = new Assets[name]();
+			  	gameTextures[name] = Texture.fromBitmap(bitmap);
+				
+			}	
 			return gameTextures[name];
 		}
 
